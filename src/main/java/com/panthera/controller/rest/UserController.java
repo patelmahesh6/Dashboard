@@ -11,6 +11,7 @@ import com.panthera.beans.RegisterUserBean;
 import com.panthera.beans.UserInfoBean;
 import com.panthera.model.User;
 import com.panthera.model.UserInfo;
+import com.panthera.service.MailService;
 import com.panthera.service.UserService;
 import com.panthera.utils.PaginationUtil;
 import java.util.List;
@@ -42,6 +43,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private MailService mailService;
 
     @GetMapping("/authenticate")
     public String isAuthenticated(HttpServletRequest request) {

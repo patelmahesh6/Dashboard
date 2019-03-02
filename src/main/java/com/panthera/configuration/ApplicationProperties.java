@@ -6,6 +6,7 @@
 package com.panthera.configuration;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.web.cors.CorsConfiguration;
 
@@ -18,4 +19,18 @@ public class ApplicationProperties {
 
     @Getter
     private final CorsConfiguration cors = new CorsConfiguration();
+
+    @Getter
+    private final Mail mail = new Mail();
+
+    @Getter
+    @Setter
+    public static class Mail {
+
+        private boolean enabled;
+        private String from;
+        private String baseUrl;
+
+    }
+
 }
