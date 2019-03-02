@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "UserInfo")
+@Table(name = "user_info")
 public class UserInfo extends AbstractAuditingEntity implements Serializable {
 
     @Id

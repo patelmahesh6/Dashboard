@@ -25,17 +25,17 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @ComponentScan({"com.panthera.controller"})
 public class SwaggerConfiguraton {
-
+    
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("com.panthera.controller"))
                 .paths(regex("/.*"))
                 .build()
                 .apiInfo(apiInfo());
     }
-
+    
     private ApiInfo apiInfo() {
         return new ApiInfo(
                 "REST API",
