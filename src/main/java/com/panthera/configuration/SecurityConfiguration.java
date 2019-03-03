@@ -110,7 +110,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/account/reset-password/init").permitAll()
                 .antMatchers("/account/reset-password/finish").permitAll()
                 .antMatchers("/dashboard/**").authenticated()
-                .antMatchers("/actuator/**").hasAuthority(AuthoritiesConstants.ADMIN)
+                .antMatchers("/actuator/**").hasAuthority(AuthoritiesConstants.ANONYMOUS)
                 .antMatchers("/v2/api-docs", "/swagger*/**", "/webjars/**").permitAll()
                 .and()
                 .apply(securityConfigurerAdapter());

@@ -24,43 +24,43 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
  */
 @ControllerAdvice(annotations = RestController.class)
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
-
+    
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request) {
-
+        
         ExceptionResponse exceptionResponse = new ExceptionResponse();
         exceptionResponse.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         exceptionResponse.setDetails(new String[]{ex.getLocalizedMessage()});
         exceptionResponse.setErrorMessage("Internal Server Error");
-
+        
         return new ResponseEntity(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
+    
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-
+        
         List<String> details = new ArrayList<>();
         for (ObjectError error : ex.getBindingResult().getAllErrors()) {
             details.add(error.getDefaultMessage());
         }
-
+        
         ExceptionResponse exceptionResponse = new ExceptionResponse();
         exceptionResponse.setStatus(HttpStatus.BAD_REQUEST.value());
         exceptionResponse.setErrorMessage("Validation Failed");
         exceptionResponse.setDetails(details.stream().toArray(String[]::new));
-
+        
         return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
-
+    
     @ExceptionHandler(RecordNotFoundException.class)
     public final ResponseEntity<Object> handleRecordNotFoundException(RecordNotFoundException ex, WebRequest request) {
-
+        
         ExceptionResponse exceptionResponse = new ExceptionResponse();
         exceptionResponse.setStatus(HttpStatus.NOT_FOUND.value());
         exceptionResponse.setDetails(new String[]{ex.getLocalizedMessage()});
         exceptionResponse.setErrorMessage("Record Not Found");
-
+        
         return new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
     }
-
+    
 }

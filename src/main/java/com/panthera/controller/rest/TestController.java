@@ -43,4 +43,9 @@ public class TestController {
         mailService.sendActivationEmail(user);
     }
 
+    @GetMapping("/exception")
+    public void getEception() throws Exception {
+        throw new Exception("Exception Occurred");
+    }
+
 }

@@ -24,12 +24,25 @@ public class ApplicationProperties {
     private final Mail mail = new Mail();
 
     @Getter
+    private final Async async = new Async();
+
+    @Getter
     @Setter
     public static class Mail {
 
         private boolean enabled;
         private String from;
         private String baseUrl;
+
+    }
+
+    @Getter
+    @Setter
+    public static class Async {
+
+        private int corePoolSize = 2;
+        private int maxPoolSize = 10;
+        private int queueCapacity = 1000;
 
     }
 
