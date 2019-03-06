@@ -47,7 +47,7 @@ public class UserController {
     @Autowired
     private MailService mailService;
 
-    @GetMapping("/authenticate")
+    @GetMapping("/login")
     public String isAuthenticated(HttpServletRequest request) {
         return request.getRemoteUser();
     }
@@ -104,19 +104,19 @@ public class UserController {
     }
 
     @MethodExecutionTime
-    @GetMapping(path = "/getUserDetails", produces = "application/json")
+    @GetMapping(path = "/api/getUserDetails", produces = "application/json")
     public ResponseEntity<UserInfo> getAllUserDetails() {
         //throw new RecordNotFoundException("No Record Avilable: ");
         UserInfoBean bean = new UserInfoBean();
         return new ResponseEntity<>(userService.saveUserInfo(new UserInfo()), HttpStatus.OK);
     }
 
-    @PostMapping(path = "/addUserDetails", consumes = "application/json", produces = "application/json")
+    @PostMapping(path = "/api/addUserDetails", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Object> addUserDetails(@RequestBody UserInfoBean userDetails) {
         return new ResponseEntity<>(userService.saveUserInfo(new UserInfo()), HttpStatus.OK);
     }
 
-    @GetMapping("/getAllUsers")
+    @GetMapping("/api/getAllUsers")
     public ResponseEntity<List<User>> getAllUsers(Pageable pageable) {
         final Page<User> page = userService.getAllUsers(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/getAllUsers");

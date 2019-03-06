@@ -35,7 +35,7 @@ public class JWTController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @PostMapping("/authenticate")
+    @PostMapping("/login")
     public ResponseEntity<JWTToken> authorize(@Valid @RequestBody LoginBean loginBean) {
 
         UsernamePasswordAuthenticationToken authenticationToken
