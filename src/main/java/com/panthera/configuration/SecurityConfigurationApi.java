@@ -118,6 +118,7 @@ public class SecurityConfigurationApi extends WebSecurityConfigurerAdapter {
                 .antMatchers("/v2/api-docs", "/swagger*/**", "/webjars/**").permitAll()
                 .and()
                 .oauth2Login()
+             //   .redirectionEndpoint().baseUri("/oauth2/code/*").and()
                 .userInfoEndpoint().userService(oAuth2UserService);
 
         http.apply(securityConfigurerAdapter());

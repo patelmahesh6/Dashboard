@@ -36,13 +36,12 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @NotNull
     @Pattern(regexp = Constants.LOGIN_REGEX)
     @Size(min = 1, max = 50)
-    @Column(length = 50, unique = true, nullable = false)
+    @Column(length = 50, unique = true)
     private String login;
 
     @JsonIgnore
-    @NotNull
     @Size(min = 60, max = 60)
-    @Column(name = "password_hash", length = 60, nullable = false)
+    @Column(name = "password_hash", length = 60)
     private String password;
 
     @Size(max = 50)
