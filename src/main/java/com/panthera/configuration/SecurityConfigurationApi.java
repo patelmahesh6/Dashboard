@@ -5,6 +5,7 @@
  */
 package com.panthera.configuration;
 
+import com.panthera.handler.oauth.oAuth2SuccessHandler;
 import com.panthera.security.CustomOAuth2UserService;
 import com.panthera.security.jwt.JWTConfigurer;
 import com.panthera.security.jwt.TokenProvider;
@@ -56,6 +57,10 @@ public class SecurityConfigurationApi extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private CorsFilter corsFilter;
+    
+    @Autowired
+    private oAuth2SuccessHandler oAuth2SuccessHandler;
+
 
     @PostConstruct
     public void init() {
@@ -118,7 +123,9 @@ public class SecurityConfigurationApi extends WebSecurityConfigurerAdapter {
                 .antMatchers("/v2/api-docs", "/swagger*/**", "/webjars/**").permitAll()
                 .and()
                 .oauth2Login()
-             //   .redirectionEndpoint().baseUri("/oauth2/code/*").and()
+                //.authorizationEndpoint().baseUri("/oauth/authorize").and()
+                //.redirectionEndpoint().baseUri("/oauth2/code/*").and()
+                .successHandler(oAuth2SuccessHandler)
                 .userInfoEndpoint().userService(oAuth2UserService);
 
         http.apply(securityConfigurerAdapter());

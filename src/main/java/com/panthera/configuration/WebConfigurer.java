@@ -71,6 +71,8 @@ public class WebConfigurer implements ServletContextInitializer {
         StrictHttpFirewall firewall = new StrictHttpFirewall();
         firewall.setAllowUrlEncodedSlash(true);
         firewall.setAllowSemicolon(true);
+        firewall.setAllowBackSlash(true);
+        firewall.setAllowUrlEncodedPercent(true);
         return firewall;
     }
 
