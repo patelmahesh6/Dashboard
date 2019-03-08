@@ -9,7 +9,7 @@ import com.panthera.handler.oauth.oAuth2SuccessHandler;
 import com.panthera.security.CustomOAuth2UserService;
 import com.panthera.security.jwt.JWTConfigurer;
 import com.panthera.security.jwt.TokenProvider;
-import com.panthera.utils.AuthoritiesConstants;
+import com.panthera.utility.constants.AuthoritiesConstants;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -57,10 +57,9 @@ public class SecurityConfigurationApi extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private CorsFilter corsFilter;
-    
+
     @Autowired
     private oAuth2SuccessHandler oAuth2SuccessHandler;
-
 
     @PostConstruct
     public void init() {

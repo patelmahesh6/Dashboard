@@ -5,6 +5,7 @@
  */
 package com.panthera.beans.oauth;
 
+import com.panthera.utility.enums.AuthenticationProvider;
 import com.panthera.exception.OAuth2AuthException;
 import java.util.Map;
 
@@ -15,11 +16,11 @@ import java.util.Map;
 public class OAuth2UserFactory {
 
     public static OAuth2UserDetail getOAuth2UserInfo(String registrationId, Map<String, Object> attributes) {
-        if (registrationId.equalsIgnoreCase(OAuthProvider.google.toString())) {
+        if (registrationId.equalsIgnoreCase(AuthenticationProvider.google.toString())) {
             return new GoogleOAuth2User(attributes);
-        } else if (registrationId.equalsIgnoreCase(OAuthProvider.facebook.toString())) {
+        } else if (registrationId.equalsIgnoreCase(AuthenticationProvider.facebook.toString())) {
             return new FacebookOAuth2User(attributes);
-        } else if (registrationId.equalsIgnoreCase(OAuthProvider.linkedin.toString())) {
+        } else if (registrationId.equalsIgnoreCase(AuthenticationProvider.linkedin.toString())) {
             return new LinkedInOAuthUser(attributes);
         } else {
             throw new OAuth2AuthException("Sorry! Login with " + registrationId + " is not supported yet.");

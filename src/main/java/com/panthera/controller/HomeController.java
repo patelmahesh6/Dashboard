@@ -6,12 +6,17 @@
 package com.panthera.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  *
  * @author user
  */
 @Controller
-public class AdminController {
+public class HomeController {
 
+    @GetMapping(value = {"*", "/"})
+    public String welcome() {
+        return "redirect:/login";
+    }
 }

@@ -7,7 +7,7 @@ package com.panthera.configuration;
 
 import com.panthera.aop.LoggingAspect;
 import com.panthera.aop.PerformanceAspect;
-import com.panthera.utils.Constants;
+import com.panthera.utility.constants.Constants;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;

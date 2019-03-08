@@ -5,7 +5,7 @@
  */
 package com.panthera.security;
 
-import com.panthera.utils.AuthoritiesConstants;
+import com.panthera.utility.constants.AuthoritiesConstants;
 import java.util.Optional;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;

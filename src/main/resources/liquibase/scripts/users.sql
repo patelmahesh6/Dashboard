@@ -2,14 +2,14 @@ INSERT INTO AUTHORITY  VALUES ('ROLE_ADMIN');
 INSERT INTO AUTHORITY  VALUES ('ROLE_USER');
 
 INSERT INTO USER(ID,LOGIN,PASSWORD_HASH,FIRST_NAME,LAST_NAME,EMAIL,IMAGE_URL,ACTIVATED,LANG_KEY,RESET_KEY,CREATED_BY) VALUES
- (1,'system','$2a$10$usBt4TEIG2N/JZa9p7QZruJn7AAAxnvc02L7sQz5qWdPNj9PRB8oi','System','System','system@localhost','',true,'en','system','system');
+ (1,'system','$2a$10$usBt4TEIG2N/JZa9p7QZruJn7AAAxnvc02L7sQz5qWdPNj9PRB8oi','System','System','system@localhost.com','',true,'en','system','system');
 INSERT INTO USER(ID,LOGIN,PASSWORD_HASH,FIRST_NAME,LAST_NAME,EMAIL,IMAGE_URL,ACTIVATED,LANG_KEY,RESET_KEY,CREATED_BY) VALUES
- (2,'anonymoususer','$2a$10$usBt4TEIG2N/JZa9p7QZruJn7AAAxnvc02L7sQz5qWdPNj9PRB8oi','Anonymous','User','anonymous@localhost','',true,'en','system','system');
+ (2,'anonymoususer','$2a$10$usBt4TEIG2N/JZa9p7QZruJn7AAAxnvc02L7sQz5qWdPNj9PRB8oi','Anonymous','User','anonymous@localhost.com','',true,'en','system','system');
 INSERT INTO USER(ID,LOGIN,PASSWORD_HASH,FIRST_NAME,LAST_NAME,EMAIL,IMAGE_URL,ACTIVATED,LANG_KEY,RESET_KEY,CREATED_BY) VALUES
- (3,'admin','$2a$10$usBt4TEIG2N/JZa9p7QZruJn7AAAxnvc02L7sQz5qWdPNj9PRB8oi','Administrator','Administrator','admin@localhost','',true,'en','system','system');
+ (3,'admin','$2a$10$usBt4TEIG2N/JZa9p7QZruJn7AAAxnvc02L7sQz5qWdPNj9PRB8oi','Administrator','Administrator','admin@localhost.com','',true,'en','system','system');
 INSERT INTO USER(ID,LOGIN,PASSWORD_HASH,FIRST_NAME,LAST_NAME,EMAIL,IMAGE_URL,ACTIVATED,LANG_KEY,RESET_KEY,CREATED_BY) VALUES
- (4,'user','$2a$10$usBt4TEIG2N/JZa9p7QZruJn7AAAxnvc02L7sQz5qWdPNj9PRB8oi','User','User','user@localhost','',true,'en','system','system');
+ (4,'user','$2a$10$usBt4TEIG2N/JZa9p7QZruJn7AAAxnvc02L7sQz5qWdPNj9PRB8oi','User','User','user@localhost.com','',true,'en','system','system');
 
 
 
-INSERT INTO user_authority values (1,'ROLE_ADMIN'),(1,'ROLE_USER'),(3,'ROLE_ADMIN'),(3,'ROLE_USER'),(4,'ROLE_USER');
+INSERT INTO user_authority values (1,'ROLE_ADMIN'),(1,'ROLE_USER'),(3,'ROLE_ADMIN'),(4,'ROLE_USER');

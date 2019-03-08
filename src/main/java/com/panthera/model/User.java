@@ -1,7 +1,7 @@
 package com.panthera.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.panthera.utils.Constants;
+import com.panthera.utility.constants.Constants;
 import javax.validation.constraints.Email;
 
 import javax.persistence.*;
@@ -14,7 +14,10 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 
@@ -25,6 +28,7 @@ import org.apache.commons.lang3.StringUtils;
 @Table(name = "user")
 @Getter
 @Setter
+@NoArgsConstructor
 public class User extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,8 +45,12 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @JsonIgnore
     @Size(min = 60, max = 60)
-    @Column(name = "password_hash", length = 60)
+    @Column(name = "password_hash", length = 254)
     private String password;
+
+    @Size(max = 50)
+    @Column(name = "username", length = 50)
+    private String username;
 
     @Size(max = 50)
     @Column(name = "first_name", length = 50)
@@ -53,18 +61,21 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private String lastName;
 
     @Email
-    @Size(min = 5, max = 254)
-    @Column(length = 254, unique = true)
+    @Size(min = 5, max = 50)
+    @Column(length = 50, unique = true)
     private String email;
 
-
     @Size(min = 5, max = 20)
-    @Column(length = 254)
+    @Column(length = 254, unique = true)
     private String mobileNo;
-    
+
     @NotNull
     @Column(nullable = false)
     private boolean activated = false;
+
+    @Id
+    @Column
+    private int loginType;
 
     @Size(min = 2, max = 6)
     @Column(name = "lang_key", length = 6)
@@ -97,17 +108,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
                 @JoinColumn(name = "authority_name", referencedColumnName = "name")})
     private Set<Authority> authorities = new HashSet<>();
 
-
-    public String getLogin() {
-        return login;
-    }
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UserInfo> userInfo = new ArrayList<>();
 
     // Lowercase the login before saving it in database
     public void setLogin(String login) {
         this.login = StringUtils.lowerCase(login, Locale.ENGLISH);
     }
-
-
 
     @Override
     public boolean equals(Object o) {
