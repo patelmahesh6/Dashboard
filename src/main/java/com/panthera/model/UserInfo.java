@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
@@ -31,13 +33,12 @@ public class UserInfo extends AbstractAuditingEntity implements Serializable {
     @Column(name = "userInfoId")
     private Integer userInfoId;
 
-    @NotNull
-    private String firstName;
+    @Column
+    private String authId;
 
     @NotNull
-    private String lastName;
-
-    @NotNull
-    private String email;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

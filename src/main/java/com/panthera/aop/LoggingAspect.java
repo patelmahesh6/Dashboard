@@ -5,7 +5,7 @@
  */
 package com.panthera.aop;
 
-import com.panthera.utils.Constants;
+import com.panthera.utility.constants.Constants;
 import java.util.Arrays;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;

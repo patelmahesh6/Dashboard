@@ -5,12 +5,24 @@
  */
 package com.panthera.controller.rest;
 
+import com.panthera.annotation.MethodExecutionTime;
+import com.panthera.beans.UserInfoBean;
 import com.panthera.model.User;
+import com.panthera.model.UserInfo;
 import com.panthera.service.MailService;
 import com.panthera.service.UserService;
+import com.panthera.utility.PaginationUtil;
+import java.util.List;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -46,6 +58,26 @@ public class TestController {
     @GetMapping("/exception")
     public void getEception() throws Exception {
         throw new Exception("Exception Occurred");
+    }
+
+    @MethodExecutionTime
+    @GetMapping(path = "/getUserDetails", produces = "application/json")
+    public ResponseEntity<UserInfo> getAllUserDetails() {
+        //throw new RecordNotFoundException("No Record Avilable: ");
+        UserInfoBean bean = new UserInfoBean();
+        return new ResponseEntity<>(userService.saveUserInfo(new UserInfo()), HttpStatus.OK);
+    }
+
+    @PostMapping(path = "/addUserDetails", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Object> addUserDetails(@RequestBody UserInfoBean userDetails) {
+        return new ResponseEntity<>(userService.saveUserInfo(new UserInfo()), HttpStatus.OK);
+    }
+
+    @GetMapping("/getAllUsers")
+    public ResponseEntity<List<User>> getAllUsers(Pageable pageable) {
+        final Page<User> page = userService.getAllUsers(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/getAllUsers");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
 }

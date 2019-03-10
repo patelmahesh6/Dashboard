@@ -5,7 +5,7 @@
  */
 package com.panthera.security;
 
-import com.panthera.utils.Constants;
+import com.panthera.utility.constants.Constants;
 import java.util.Optional;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.stereotype.Component;
