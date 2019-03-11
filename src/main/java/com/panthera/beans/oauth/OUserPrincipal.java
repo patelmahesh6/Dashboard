@@ -40,7 +40,7 @@ public class OUserPrincipal implements OAuth2User, UserDetails {
                 .collect(Collectors.toList());
 
         return new OUserPrincipal(
-                user.getId(),
+                user.getUserId(),
                 user.getEmail(),
                 user.getPassword(),
                 authorities

@@ -112,7 +112,7 @@ public class SecurityConfigurationApi extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login/**").permitAll()
                 .antMatchers("/oauth2/**").permitAll()
-                .antMatchers("/test").permitAll()
+                .antMatchers("/test/**").permitAll()
                 .antMatchers("/register").permitAll()
                 .antMatchers("/activate").permitAll()
                 .antMatchers("/account/reset-password/init").permitAll()

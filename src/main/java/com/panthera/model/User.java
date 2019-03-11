@@ -35,7 +35,8 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "user_id")
+    private Long userId;
 
     @NotNull
     @Pattern(regexp = Constants.LOGIN_REGEX)
@@ -73,7 +74,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(nullable = false)
     private boolean activated = false;
 
-    @Id
     @Column
     private int loginType;
 
@@ -103,7 +103,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @JoinTable(
             name = "user_authority",
             joinColumns = {
-                @JoinColumn(name = "user_id", referencedColumnName = "id")},
+                @JoinColumn(name = "user_id", referencedColumnName = "user_id")},
             inverseJoinColumns = {
                 @JoinColumn(name = "authority_name", referencedColumnName = "name")})
     private Set<Authority> authorities = new HashSet<>();
@@ -127,12 +127,12 @@ public class User extends AbstractAuditingEntity implements Serializable {
         }
 
         User user = (User) o;
-        return !(user.getId() == null || getId() == null) && Objects.equals(getId(), user.getId());
+        return !(user.getUserId() == null || getUserId() == null) && Objects.equals(getUserId(), user.getUserId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return Objects.hashCode(getUserId());
     }
 
     @Override

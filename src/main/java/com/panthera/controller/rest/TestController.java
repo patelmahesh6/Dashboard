@@ -11,6 +11,7 @@ import com.panthera.model.User;
 import com.panthera.model.UserInfo;
 import com.panthera.service.MailService;
 import com.panthera.service.UserService;
+import com.panthera.service.kafka.Producer;
 import com.panthera.utility.PaginationUtil;
 import java.util.List;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -39,6 +41,9 @@ public class TestController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private Producer producer;
 
     @GetMapping("/mail")
     public void sendMail() {
@@ -58,6 +63,14 @@ public class TestController {
     @GetMapping("/exception")
     public void getEception() throws Exception {
         throw new Exception("Exception Occurred");
+    }
+
+    @GetMapping(value = "/kafka")
+    public void sendMessageToKafkaTopic() {
+        for (int i = 0; i < 10; i++) {
+            this.producer.sendMessage("Hello World" + i);
+        }
+
     }
 
     @MethodExecutionTime
