@@ -42,9 +42,16 @@ public class TestController {
     @Autowired
     private UserService userService;
 
-    @Autowired
+    /* @Autowired
     private Producer producer;
 
+    @GetMapping(value = "/kafka")
+    public void sendMessageToKafkaTopic() {
+        for (int i = 0; i < 10; i++) {
+            this.producer.sendMessage("Hello World" + i);
+        }
+
+    }*/
     @GetMapping("/mail")
     public void sendMail() {
         User user = new User();
@@ -63,14 +70,6 @@ public class TestController {
     @GetMapping("/exception")
     public void getEception() throws Exception {
         throw new Exception("Exception Occurred");
-    }
-
-    @GetMapping(value = "/kafka")
-    public void sendMessageToKafkaTopic() {
-        for (int i = 0; i < 10; i++) {
-            this.producer.sendMessage("Hello World" + i);
-        }
-
     }
 
     @MethodExecutionTime

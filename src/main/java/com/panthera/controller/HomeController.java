@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 /**
  *
  * @author user
- */
+ */ 
 @Controller
 public class HomeController {
 
-    @GetMapping(value = {"*", "/"})
-    public String welcome() {
-        return "redirect:/login";
-    }
+//    @GetMapping(value = {"*", "/"})
+//    public String welcome() {
+//        return "index";
+//    }
 }
