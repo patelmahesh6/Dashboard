@@ -3,19 +3,26 @@ import React, { Component } from "react";
 export default class RegisterUser extends Component {
   constructor(props) {
     super(props);
-    this.state = {
+     this.state = {
       email: "",
       mobileNo: "",
       gender: "-1"
     };
   }
 
-  handleSubmit(event) {}
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  handleSubmit(e) {
+    e.preventDefault();
+  }
 
   render() {
     return (
       <div>
-        <div className="container">Register User : 
+        <div className="container">
+          Register User :
           <form onSubmit={this.handleSubmit}>
             <div className="form-group row">
               <label>Email address:</label>
@@ -23,7 +30,9 @@ export default class RegisterUser extends Component {
                 type="email"
                 className="form-control"
                 id="email"
+                name="email"
                 value={this.state.email}
+                onChange={this.onChange}
               />
             </div>
             <div className="form-group row">
@@ -33,6 +42,7 @@ export default class RegisterUser extends Component {
                 className="form-control"
                 id="mobileno"
                 value={this.state.mobileNo}
+                onChange={this.onChange}
               />
             </div>
             <div className="form-group row">
