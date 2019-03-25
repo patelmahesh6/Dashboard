@@ -1,13 +1,34 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { addUser, reset } from "./user.reducer";
 
-export default class RegisterUser extends Component {
+const mapStateToProps = state => {
+  return state;
+};
+
+const mapDispatchToProps = { addUser, reset };
+
+export class RegisterUser extends Component {
   constructor(props) {
     super(props);
-     this.state = {
+    this.state = {
       email: "",
       mobileNo: "",
       gender: "-1"
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentWillUnmount() {
+    console.log("unMount");
+    this.props.reset();
+    
+  }
+
+  componentWillMount() {
+    console.log("Mount")
+    console.log(this.state);
+    
   }
 
   onChange = e => {
@@ -15,8 +36,13 @@ export default class RegisterUser extends Component {
   };
 
   handleSubmit(e) {
+    this.props.addUser(this.state);
+    console.log(this.state);
+    this.props.reset();
+    console.log(this.state);
     e.preventDefault();
   }
+
 
   render() {
     return (
@@ -27,7 +53,7 @@ export default class RegisterUser extends Component {
             <div className="form-group row">
               <label>Email address:</label>
               <input
-                type="email"
+                type="text"
                 className="form-control"
                 id="email"
                 name="email"
@@ -40,12 +66,17 @@ export default class RegisterUser extends Component {
               <input
                 type="text"
                 className="form-control"
-                id="mobileno"
+                id="mobileNo"
+                name="mobileNo"
                 value={this.state.mobileNo}
                 onChange={this.onChange}
               />
             </div>
-            <div className="form-group row">
+            <div
+              className="form-group row"
+              value={this.state.gender}
+              onChange={this.onChange}
+            >
               <label>Gender:</label>
               <select className="form-control">
                 <option value="-1">Please Choose</option>
@@ -64,3 +95,7 @@ export default class RegisterUser extends Component {
     );
   }
 }
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RegisterUser);
