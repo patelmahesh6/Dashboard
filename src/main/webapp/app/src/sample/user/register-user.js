@@ -19,17 +19,9 @@ export class RegisterUser extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentWillUnmount() {
-    console.log("unMount");
-    this.props.reset();
-    
-  }
+  componentWillUnmount() {}
 
-  componentWillMount() {
-    console.log("Mount")
-    console.log(this.state);
-    
-  }
+  componentWillMount() {}
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -37,12 +29,8 @@ export class RegisterUser extends Component {
 
   handleSubmit(e) {
     this.props.addUser(this.state);
-    console.log(this.state);
-    this.props.reset();
-    console.log(this.state);
     e.preventDefault();
   }
-
 
   render() {
     return (

@@ -1,9 +1,22 @@
-{
-    "userId": "1",
-    "username": "jarvis",
-    "email": "jarvis@gmail.com",
-    "mobileNo": "+97155555555",
-    "age": "52",
-    "birthDate": "2/2/1995",
-    "gender": "1"
-  }
+ [
+    {
+      "userId": "1",
+      "username": "jarvis",
+      "email": "jarvis@gmail.com",
+      "mobileNo": "+97155555555",
+      "age": "52",
+      "birthDate": "2/2/1995",
+      "gender": "1",
+      "password": "123456"
+    },
+    {
+      "userId": "2",
+      "username": "jarvis",
+      "email": "jarvis@gmail.com",
+      "mobileNo": "+97155555555",
+      "age": "52",
+      "birthDate": "2/2/1995",
+      "gender": "1",
+      "password": "123456"
+    }
+  ]

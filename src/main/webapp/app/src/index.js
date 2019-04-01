@@ -6,11 +6,14 @@ import registerServiceWorker from "./registerServiceWorker";
 import "bootstrap/dist/css/bootstrap.css";
 import store from "./config/store";
 import { Provider } from "react-redux";
+import ErrorBoundary from "./shared/error/error-boundary";
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <ErrorBoundary>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </ErrorBoundary>,
   document.getElementById("root")
 );
 
