@@ -2,6 +2,8 @@ package com.panthera.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.panthera.utility.constants.Constants;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.Email;
 
 import javax.persistence.*;
@@ -29,6 +31,7 @@ import org.apache.commons.lang3.StringUtils;
 @Getter
 @Setter
 @NoArgsConstructor
+@ApiModel(description = "All details about the User ")
 public class User extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,6 +58,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @Size(max = 50)
     @Column(name = "first_name", length = 50)
+    @ApiModelProperty(notes = "The user first name")
     private String firstName;
 
     @Size(max = 50)

@@ -10,6 +10,9 @@ import com.panthera.beans.RegisterUserBean;
 import com.panthera.model.User;
 import com.panthera.service.MailService;
 import com.panthera.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -30,6 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/")
+@Api(value = "User Management", description = "Operations realated to user")
 public class UserController {
 
     @Autowired
@@ -45,7 +49,8 @@ public class UserController {
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public void registerAccount(@Valid @RequestBody RegisterUserBean registerBean) throws Exception {
+    @ApiOperation(value = "Register User")
+    public void registerAccount( @Valid @RequestBody RegisterUserBean registerBean) throws Exception {
         if (!checkPasswordLength(registerBean.getPassword())) {
             throw new Exception("Invalid Password");
         }
@@ -56,7 +61,8 @@ public class UserController {
     }
 
     @GetMapping("/activate")
-    public void activateAccount(@RequestParam(value = "key") String key) throws Exception {
+    @ApiOperation(value = "Activate Account")
+    public void activateAccount( @ApiParam(value = "Need the key to activate user", required = true) @RequestParam(value = "key") String key) throws Exception {
         Optional<User> user = userService.activateRegistration(key);
         if (!user.isPresent()) {
             throw new Exception("No user was found for this activation key");
