@@ -5,8 +5,9 @@
  */
 package com.panthera.controller.rest;
 
-import com.panthera.beans.PasswordChangeBean;
-import com.panthera.beans.RegisterUserBean;
+import com.panthera.beans.PasswordChange;
+import com.panthera.beans.RegisterUser;
+import com.panthera.exception.EmailNotFoundException;
 import com.panthera.model.User;
 import com.panthera.service.MailService;
 import com.panthera.service.UserService;
@@ -16,6 +17,7 @@ import io.swagger.annotations.ApiParam;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
@@ -34,6 +36,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/")
 @Api(value = "User Management", description = "Operations realated to user")
+@Slf4j
 public class UserController {
 
     @Autowired
@@ -50,19 +53,19 @@ public class UserController {
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "Register User")
-    public void registerAccount( @Valid @RequestBody RegisterUserBean registerBean) throws Exception {
+    public void registerAccount(@Valid @RequestBody RegisterUser registerBean) throws Exception {
         if (!checkPasswordLength(registerBean.getPassword())) {
             throw new Exception("Invalid Password");
         }
         User user = userService.registerUser(registerBean, registerBean.getPassword());
-
+       
         // Send Mail
         // mailService.sendActivationEmail(user);
     }
 
     @GetMapping("/activate")
     @ApiOperation(value = "Activate Account")
-    public void activateAccount( @ApiParam(value = "Need the key to activate user", required = true) @RequestParam(value = "key") String key) throws Exception {
+    public void activateAccount(@ApiParam(value = "Need the key to activate user", required = true) @RequestParam(value = "key") String key) throws Exception {
         Optional<User> user = userService.activateRegistration(key);
         if (!user.isPresent()) {
             throw new Exception("No user was found for this activation key");
@@ -70,7 +73,7 @@ public class UserController {
     }
 
     @PostMapping(path = "/account/change-password")
-    public void changePassword(@RequestBody PasswordChangeBean passwordChangeDto) throws Exception {
+    public void changePassword(@RequestBody PasswordChange passwordChangeDto) throws Exception {
         if (!checkPasswordLength(passwordChangeDto.getNewPassword())) {
             throw new Exception("Invalid Password");
         }
@@ -80,15 +83,14 @@ public class UserController {
     @PostMapping(path = "/account/reset-password/init")
     public void requestPasswordReset(@RequestBody String mail) {
         //Send Reset Password  Mail 
-
-        /*mailService.sendPasswordResetMail(
+        mailService.sendPasswordResetMail(
                 userService.requestPasswordReset(mail)
                         .orElseThrow(EmailNotFoundException::new)
-        );*/
+        );
     }
 
     @PostMapping(path = "/account/reset-password/finish")
-    public void finishPasswordReset(@RequestBody PasswordChangeBean passwordChangeDto) throws Exception {
+    public void finishPasswordReset(@RequestBody PasswordChange passwordChangeDto) throws Exception {
         if (!checkPasswordLength(passwordChangeDto.getNewPassword())) {
             throw new Exception("Invalid Password");
         }

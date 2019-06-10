@@ -7,10 +7,12 @@ package com.panthera.repository;
 
 import com.panthera.model.Authority;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Mahesh
  */
+@Repository
 public interface AuthorityRepository extends JpaRepository<Authority, String> {
 }

@@ -5,7 +5,7 @@
  */
 package com.panthera.service;
 
-import com.panthera.beans.RegisterUserBean;
+import com.panthera.beans.RegisterUser;
 import com.panthera.model.Authority;
 import com.panthera.model.User;
 import com.panthera.model.UserInfo;
@@ -14,7 +14,6 @@ import com.panthera.repository.UserRepository;
 import com.panthera.security.SecurityUtils;
 import com.panthera.utility.RandomUtil;
 import com.panthera.utility.constants.AuthoritiesConstants;
-import com.panthera.utility.constants.Constants;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.List;
@@ -48,7 +47,7 @@ public class UserService {
     @Autowired
     private AuthorityRepository authorityRepository;
 
-    public User registerUser(RegisterUserBean registerBean, String password) {
+    public User registerUser(RegisterUser registerBean, String password) {
         userRepository.findOneByLogin(registerBean.getLogin().toLowerCase()).ifPresent(existingUser -> {
             throw new RuntimeException("Login Already Used");
         });
@@ -151,6 +150,10 @@ public class UserService {
 
     public Page<User> getAllUsers(Pageable pageable) {
         return userRepository.findAll(pageable);
+    }
+
+    public Optional<User> requestPasswordReset(String mail) {
+        return userRepository.findOneByEmailIgnoreCase(mail);
     }
 
 }

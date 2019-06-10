@@ -22,6 +22,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 
 /**
  * A user.
@@ -32,6 +34,7 @@ import org.apache.commons.lang3.StringUtils;
 @Setter
 @NoArgsConstructor
 @ApiModel(description = "All details about the User ")
+@Audited
 public class User extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,14 +50,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(length = 50, unique = true)
     private String login;
 
+    @Size(max = 50)
+    @Column(name = "username", length = 50)
+    private String username;
+
     @JsonIgnore
     @Size(min = 60, max = 60)
     @Column(name = "password_hash", length = 254)
     private String password;
-
-    @Size(max = 50)
-    @Column(name = "username", length = 50)
-    private String username;
 
     @Size(max = 50)
     @Column(name = "first_name", length = 50)
@@ -104,6 +107,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @JsonIgnore
     @ManyToMany
+    @NotAudited
     @JoinTable(
             name = "user_authority",
             joinColumns = {
@@ -113,6 +117,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private Set<Authority> authorities = new HashSet<>();
 
     @JsonIgnore
+    @NotAudited
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserInfo> userInfo = new ArrayList<>();
 

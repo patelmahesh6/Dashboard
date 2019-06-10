@@ -56,4 +56,5 @@ public class Authority implements Serializable {
                 + "name='" + name + '\''
                 + "}";
     }
+
 }
